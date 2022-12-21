@@ -7,7 +7,7 @@ const Button = ({
   size = "medium",
   onClick = () => {},
   disabled = false,
-  label = "Clicked",
+  label = "",
   ...otherProps
 }) => {
   const handleClick = () => {
