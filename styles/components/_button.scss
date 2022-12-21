@@ -1,0 +1,57 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  font-size: $font-sm;
+  font-weight: $font-semibold;
+  border-radius: $border-rounded-md;
+  line-height: 1.2;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: -0.15px;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+// styles
+.button--style {
+  &-primary {
+    color: $white;
+    background-color: $primary;
+  }
+
+  &-secondary {
+    color: $white;
+    background-color: $secondary;
+  }
+
+  &-text {
+    color: $gray-900;
+  }
+}
+
+//size
+.button--size {
+  &-small {
+    font-size: $text-base;
+    padding: 4px 8px;
+  }
+
+  &-medium {
+    font-size: $text-base;
+    padding: 6px 10px;
+  }
+
+  &-large {
+    font-size: $text-base;
+    padding: 8px 12px;
+  }
+}

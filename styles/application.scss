@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./abstracts/variable";
+@import "./base/index";
+
+// components
+@import "./components/button";
