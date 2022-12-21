@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <div className="absolute bottom-0 flex flex-col space-y-0 w-screen text-center h-10 px-10 my-5">
       <span className="italic text-slate-500">
-        {FOOTER_MESSAGES[randomNumber]
+        {FOOTER_MESSAGES[randomNumber]}
       </span>
       <span>Made with 💔 </span>
     </div>
