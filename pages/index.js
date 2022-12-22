@@ -1,18 +1,26 @@
-import {useState, useEffect, useRef} from "react";
-import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
+import { useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { createTheme } from "@uiw/codemirror-themes";
+import { EditorView } from "@codemirror/view";
 
 import Head from "next/head";
 import Button from "../components/Button";
-import Textarea from "../components/Textarea";
+
+import { CODE_EDITOR_THEME } from "../constants/theme";
 
 export default function Home() {
-
-  const [json, setJson] = useState();
+  const [inputString, setInputString] = useState("");
+  const [outputString, setOutputString] = useState("");
 
   const handleFormat = () => {
-    console.log(JSON.stringify(json, null, 4))
-  }
+    setOutputString(JSON.stringify(JSON.parse(inputString), null, 2));
+  };
+
+  const handleClear = () => {
+    setInputString("");
+    setOutputString("");
+  };
 
   return (
     <div className="h-screen flex-col justify-between bg-zinc-900 p-5">
@@ -26,32 +34,27 @@ export default function Home() {
         <p className="text-2xl text-center">JSON STYLE</p>
         <div className="space-y-3 flex-col">
           <div className="flex space-x-3 h-90">
-            {/* <Textarea
-              className="w-1/2"
-              rows={22}
-              label="JSON String"
-              onChange={(e) => setJson(JSON.parse(e.target.value))}
-            /> */}
-             <CodeMirror
-              className="w-1/2 mt-7 overflow-x-auto h-full"
-              value={JSON.stringify(json)}
+            <CodeMirror
+              autoFocus
               height="548px"
               theme="dark"
+              value={inputString}
               extensions={[javascript({ jsx: true })]}
-              onChange={(e) => setJson(JSON.parse(e))}
+              onChange={(e) => setInputString(e)}
+              className="w-1/2 mt-7 h-full"
             />
             <CodeMirror
-              className="w-1/2 mt-7 overflow-auto h-full"
-              value={JSON.stringify(json, null, 2)}
               height="548px"
-              theme="dark"
+              theme={createTheme(CODE_EDITOR_THEME)}
               editable={false}
-              extensions={[javascript({ jsx: true })]}
+              value={outputString}
+              extensions={[javascript({ jsx: true }), EditorView.lineWrapping]}
+              className="w-1/2 mt-7 overflow-auto h-full"
             />
           </div>
           <div className="flex bg-zinc-800 space-x-3 px-1 py-3 rounded">
             <Button className="ml-1" label="Format" onClick={handleFormat} />
-            <Button className="ml-1" label="Reset" />
+            <Button className="ml-1" label="Clear" onClick={handleClear} />
           </div>
         </div>
         {/* <Footer /> */}
