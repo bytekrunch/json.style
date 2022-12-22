@@ -1,9 +1,27 @@
+import { useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { createTheme } from "@uiw/codemirror-themes";
+import { EditorView } from "@codemirror/view";
+
 import Head from "next/head";
-import Footer from "../components/Footer";
 import Button from "../components/Button";
-import Textarea from "../components/Textarea";
+
+import { CODE_EDITOR_THEME } from "../constants/theme";
 
 export default function Home() {
+  const [inputString, setInputString] = useState("");
+  const [outputString, setOutputString] = useState("");
+
+  const handleFormat = () => {
+    setOutputString(JSON.stringify(JSON.parse(inputString), null, 2));
+  };
+
+  const handleClear = () => {
+    setInputString("");
+    setOutputString("");
+  };
+
   return (
     <div className="h-screen flex-col justify-between bg-zinc-900 p-5">
       <Head>
@@ -14,24 +32,29 @@ export default function Home() {
 
       <main>
         <p className="text-2xl text-center">JSON STYLE</p>
-        <div className="space-y-3">
-          <div className="flex space-x-3 mt-5">
-            <Textarea
-              className="w-1/2"
-              rows={24}
-              label="JSON String"
-              onChange={(e) => console.log(e.target.value)}
+        <div className="space-y-3 flex-col">
+          <div className="flex space-x-3 h-90">
+            <CodeMirror
+              autoFocus
+              height="548px"
+              theme="dark"
+              value={inputString}
+              extensions={[javascript({ jsx: true })]}
+              onChange={(e) => setInputString(e)}
+              className="w-1/2 mt-7 h-full"
             />
-            <Textarea
-              className="w-1/2"
-              rows={24}
-              label="Output"
-              onChange={(e) => console.log(e.target.value)}
+            <CodeMirror
+              height="548px"
+              theme={createTheme(CODE_EDITOR_THEME)}
+              editable={false}
+              value={outputString}
+              extensions={[javascript({ jsx: true }), EditorView.lineWrapping]}
+              className="w-1/2 mt-7 overflow-auto h-full"
             />
           </div>
           <div className="flex bg-zinc-800 space-x-3 px-1 py-3 rounded">
-            <Button className="ml-1" label="Format" />
-            <Button className="ml-1" label="Reset" />
+            <Button className="ml-1" label="Format" onClick={handleFormat} />
+            <Button className="ml-1" label="Clear" onClick={handleClear} />
           </div>
         </div>
         {/* <Footer /> */}
