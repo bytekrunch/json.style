@@ -27,10 +27,10 @@
       box-shadow: none;
       outline: none;
       padding: 10px;
-      max-height: 224px;
       overflow-y: auto;
       line-height: 1.5;
       background-color: #27272a;
+      resize: none;
 
       &::placeholder {
         color: #e4e4e7;
