@@ -1,4 +1,5 @@
 import "../styles/application.scss";
+// import 'codemirror/lib/codemirror.css'
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
