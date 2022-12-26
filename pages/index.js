@@ -5,6 +5,7 @@ import { createTheme } from "@uiw/codemirror-themes";
 import { EditorView } from "@codemirror/view";
 
 import Head from "next/head";
+import { ToastContainer } from 'react-toastify';
 import Button from "../components/Button";
 
 import { CODE_EDITOR_THEME } from "../constants/theme";
@@ -31,6 +32,11 @@ export default function Home() {
       </Head>
 
       <main>
+        <ToastContainer 
+          // @Shreya defining this here instead of TOAST_OPTIONS to make implementing dark mode easier
+          // Global state pole vekkam ivide
+          theme="dark" 
+        />
         <p className="text-2xl text-center">JSON STYLE</p>
         <div className="space-y-3 flex-col">
           <div className="flex space-x-3 h-90">
