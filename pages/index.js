@@ -54,7 +54,7 @@ export default function Home() {
   };
 
   const handleDemoJson = () => {
-    setInputString(JSON.stringify(DEMO_STRING));
+    setInputString(JSON.stringify(DEMO_JSON_STRING));
     setOutputString("");
   };
 
@@ -93,14 +93,21 @@ export default function Home() {
               />
             </div>
             <div className="w-full bg-[#282c34]">
-              <Copy className="ml-auto py-2" size={30} onClick={handleCopy} />
+              <Button
+                size="small"
+                style="text"
+                onClick={handleCopy}
+                icon={Copy}
+                className="float-right"
+                disabled={outputString === ""}
+              />
               <CodeMirror
                 height="548px"
                 theme={createTheme(CODE_EDITOR_THEME)}
                 editable={false}
                 value={outputString}
                 extensions={editorExtensions}
-                className="overflow-auto h-full"
+                className="overflow-auto h-full mt-7"
               />
             </div>
           </div>
