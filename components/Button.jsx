@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import classnames from "classnames";
 
@@ -11,6 +12,8 @@ const Button = ({
   href = "",
   to = "",
   type = "button",
+  icon = null,
+  iconSize = 16,
   ...otherProps
 }) => {
   let Parent, elementSpecificProps;
@@ -31,6 +34,8 @@ const Button = ({
     if (!disabled) onClick();
   };
 
+  const Icon = icon || React.Fragment;
+
   return (
     <Parent
       onClick={handleClick}
@@ -48,6 +53,7 @@ const Button = ({
       {...elementSpecificProps}
     >
       {label && <span>{label}</span>}
+      {icon && <Icon size={iconSize} className="cs-ui-btn__icon" />}
     </Parent>
   );
 };
