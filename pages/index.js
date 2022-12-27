@@ -17,7 +17,7 @@ export default function Home() {
 
   const handleFormat = () => {
     try {
-      setOutputString(JSON.stringify(JSON.parse(inputString), null, 2));
+      setOutputString(JSON.stringify(JSON.parse(inputString), null, 4));
     } catch (error) {
       Toastr.error("Enter Valid JSON");
     }
@@ -75,9 +75,9 @@ export default function Home() {
             />
           </div>
           <div className="flex bg-zinc-800 space-x-3 px-3 py-3 rounded spacy-x-2">
-            <Button className="" label="Format" onClick={handleFormat} />
-            <Button className="" label="Clear" onClick={handleClear} />
-            <Button className="" label="Download" onClick={handleDownload} />
+            <Button label="Format" onClick={handleFormat} />
+            <Button label="Clear" onClick={handleClear} />
+            <Button label="Download" onClick={handleDownload} />
           </div>
         </div>
         {/* <Footer /> */}
