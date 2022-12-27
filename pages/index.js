@@ -114,7 +114,11 @@ export default function Home() {
           <div className="flex bg-zinc-800 space-x-3 px-3 py-3 rounded spacy-x-2">
             <Button label="Format" onClick={handleFormat} />
             <Button label="Clear" onClick={handleClear} />
-            <Button label="Download" onClick={handleDownload} />
+            <Button
+              label="Download"
+              onClick={handleDownload}
+              disabled={outputString === ""}
+            />
           </div>
         </div>
         {/* <Footer /> */}
