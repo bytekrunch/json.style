@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { createTheme } from "@uiw/codemirror-themes";
 import { EditorView } from "@codemirror/view";
 
 import Head from "next/head";
-import { ToastContainer } from 'react-toastify';
+import Toastr from "../components/Toastr";
+import { ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 
 import { CODE_EDITOR_THEME } from "../constants/theme";
@@ -15,13 +16,32 @@ export default function Home() {
   const [outputString, setOutputString] = useState("");
 
   const handleFormat = () => {
-    setOutputString(JSON.stringify(JSON.parse(inputString), null, 2));
+    try {
+      setOutputString(JSON.stringify(JSON.parse(inputString), null, 2));
+    } catch (error) {
+      Toastr.error("Enter Valid JSON");
+    }
   };
 
   const handleClear = () => {
     setInputString("");
     setOutputString("");
   };
+
+  const handleDownload = () => {
+    const element = document.createElement("a");
+    const file = new Blob([outputString], {
+      type: "text/plain;charset=utf-8",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = "json.txt";
+    document.body.appendChild(element);
+    element.click();
+  };
+
+  useEffect(() => {
+    inputString === "" && setOutputString("");
+  }, [inputString]);
 
   return (
     <div className="h-screen flex-col justify-between bg-zinc-900 p-5">
@@ -32,11 +52,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <ToastContainer 
-          // @Shreya defining this here instead of TOAST_OPTIONS to make implementing dark mode easier
-          // Global state pole vekkam ivide
-          theme="dark" 
-        />
+        <ToastContainer theme="dark" />
         <p className="text-2xl text-center">JSON STYLE</p>
         <div className="space-y-3 flex-col">
           <div className="flex space-x-3 h-90">
@@ -58,9 +74,10 @@ export default function Home() {
               className="w-1/2 mt-7 overflow-auto h-full"
             />
           </div>
-          <div className="flex bg-zinc-800 space-x-3 px-1 py-3 rounded">
-            <Button className="ml-1" label="Format" onClick={handleFormat} />
-            <Button className="ml-1" label="Clear" onClick={handleClear} />
+          <div className="flex bg-zinc-800 space-x-3 px-3 py-3 rounded spacy-x-2">
+            <Button className="" label="Format" onClick={handleFormat} />
+            <Button className="" label="Clear" onClick={handleClear} />
+            <Button className="" label="Download" onClick={handleDownload} />
           </div>
         </div>
         {/* <Footer /> */}
