@@ -8,14 +8,31 @@ const Button = ({
   onClick = () => {},
   disabled = false,
   label = "",
+  href = "",
+  to = "",
+  type = "button",
   ...otherProps
 }) => {
+  let Parent, elementSpecificProps;
+  if (to) {
+    Parent = Link;
+    elementSpecificProps = { to };
+  } else if (href) {
+    Parent = motion.a;
+    elementSpecificProps = { href };
+  } else {
+    Parent = motion.button;
+    elementSpecificProps = {
+      type,
+    };
+  }
+
   const handleClick = () => {
     if (!disabled) onClick();
   };
 
   return (
-    <motion.button
+    <Parent
       onClick={handleClick}
       disabled={disabled}
       className={classnames("button", [className], {
@@ -28,9 +45,10 @@ const Button = ({
         disabled: disabled,
       })}
       {...otherProps}
+      {...elementSpecificProps}
     >
       {label && <span>{label}</span>}
-    </motion.button>
+    </Parent>
   );
 };
 
