@@ -10,7 +10,7 @@ import Button from "../components/Button";
 
 import { CODE_EDITOR_THEME } from "../constants/theme";
 import { DEMO_JSON_STRING } from "../components/constants";
-import { Copy } from "../components/Copy";
+import { Copy } from "../icons/Copy";
 
 export default function Home() {
   const [inputString, setInputString] = useState(
