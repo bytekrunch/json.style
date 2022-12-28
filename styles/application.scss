@@ -4,8 +4,9 @@
 
 @import "./abstracts/variable";
 @import "./base/index";
+@import "react-toastify/dist/ReactToastify.min.css";
 
 // components
 @import "./components/button";
 @import "./components/textarea";
-@import "react-toastify/dist/ReactToastify.min.css";
+@import "./components/select";
