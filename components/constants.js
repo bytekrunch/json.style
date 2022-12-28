@@ -27,3 +27,11 @@ export const DEMO_JSON_STRING = {
     },
   },
 };
+
+export const INDENTATION_SPACE_OPTIONS = [
+  { label: 2, value: 2 },
+  { label: 3, value: 3 },
+  { label: 4, value: 4 },
+];
+
+export const DEFAULT_INDENTATION_SPACE = { label: 2, value: 2 };
