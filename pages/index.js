@@ -163,6 +163,8 @@ export default function Home() {
         </div>
         {/* <Footer /> */}
       </main>
+      <script data-goatcounter="https://json-style.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
     </div>
   );
 }
