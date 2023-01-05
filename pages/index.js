@@ -58,7 +58,7 @@ export default function Home() {
   const handleCopy = () => {
     try {
       navigator.clipboard.writeText(outputString);
-      Toastr.success("Copied to clipboard");
+      Toastr.success("🦄 Copied to clipboard!");
     } catch (error) {
       Toastr.error("Could not Copy. Try again");
     }

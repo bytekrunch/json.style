@@ -6,7 +6,7 @@ export const CODE_EDITOR_THEME = {
     background: "#282c34",
     // foreground: "#F1FA8C",
     foreground: "#7aa2f7",
-    caret: "282c34",
+    caret: "fuchsia",
     gutters: "#282c34",
     selection: "#000000",
     selectionMatch: "#555555",
@@ -17,7 +17,7 @@ export const CODE_EDITOR_THEME = {
   styles: [
     { tag: t.brace, color: "#ABB2BF" },
     { tag: t.squareBracket, color: "#CCCCCC" },
-    { tag: t.separator, color: "ABB2BF" },
+    { tag: t.separator, color: "#ABB2BF" },
     { tag: t.string, color: "#CCCCCC" },
   ],
 };
