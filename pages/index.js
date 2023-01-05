@@ -88,7 +88,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="h-screen flex flex-col justify-between bg-[#111111] p-3 px-5">
+      <main className="h-screen flex flex-col justify-between bg-[#111111] pt-3 pb-4 px-4">
         <ToastContainer theme="dark" />
         <Header />
         <div className="space-y-3 grow flex flex-col">
@@ -124,7 +124,7 @@ export default function Home() {
               />
             </div>
             <div className="flex flex-col min-w-80 w-80 justify-start space-y-2 px-1  rounded">
-              <label className="text-xs">Formatting</label>
+              <label className="text-xs text-[#888888]">Formatting</label>
               <div className="flex flex-col space-y-2">
                 <Button
                   label="Prettify"
@@ -145,7 +145,7 @@ export default function Home() {
                   label="Demo JSON"
                 />
               </div>
-              <label className="text-xs pt-3">Indentation</label>
+              <label className="text-xs pt-3 text-[#888888]">Indentation</label>
               <div className="flex flex-col">
                 <input
                   type="file"
