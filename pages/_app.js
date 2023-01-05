@@ -10,7 +10,7 @@ const publicSans = Public_Sans({
 function MyApp({ Component, pageProps }) {
   return (
     <main className={publicSans.className}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </main>
   )
 }
