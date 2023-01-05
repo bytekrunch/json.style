@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
+import { json } from "@codemirror/lang-json";
 import { createTheme } from "@uiw/codemirror-themes";
 import { EditorView } from "@codemirror/view";
 import Head from "next/head";
@@ -27,7 +27,7 @@ export default function Home() {
   const hiddenFileInput = useRef(null);
   const selectRef = useRef(null);
 
-  let editorExtensions = [javascript({ jsx: true }), EditorView.lineWrapping];
+  let editorExtensions = [json(), EditorView.lineWrapping];
 
   const handleFormat = (indentationSpace = 2) => {
     try {
@@ -88,35 +88,30 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="h-screen flex flex-col justify-between bg-zinc-900 p-5">
+      <main className="h-screen flex flex-col justify-between bg-[#111111] p-3 px-5">
         <ToastContainer theme="dark" />
         <Header />
         <div className="space-y-3 grow flex flex-col">
-          <div className="flex grow space-x-3">
+          <div className="flex flex-1 relative grow space-x-3">
             <div className="w-full bg-[#282c34]">
-              <Button
-                size="small"
-                style="text"
-                label="Demo JSON"
-                onClick={handleDemoJson}
-              />
               <CodeMirror
                 autoFocus
                 height="590px"
-                theme="dark"
+                theme={createTheme(CODE_EDITOR_THEME)}
                 value={inputString}
                 extensions={editorExtensions}
                 onChange={(e) => setInputString(e)}
                 className="h-full mt-1"
               />
             </div>
-            <div className="w-full bg-[#282c34]">
+            <div className="w-full relative bg-[#282c34]">
               <Button
-                size="small"
+                size="medium"
                 style="text"
                 onClick={handleCopy}
                 icon={Copy}
-                className="float-right"
+                iconSize="22"
+                className="float-right absolute z-10 right-0 top-0"
                 disabled={outputString === ""}
               />
               <CodeMirror
@@ -125,43 +120,53 @@ export default function Home() {
                 editable={false}
                 value={outputString}
                 extensions={editorExtensions}
-                className="overflow-auto h-full mt-7"
+                className="overflow-auto absolute h-full mt-1 w-full"
               />
             </div>
-          </div>
-          <div className="flex justify-end bg-zinc-800 space-x-3 px-3 py-3 rounded">
-            <Button
-              label="Format"
-              onClick={() => handleFormat(selectRef.current.state.value.value)}
-            />
-            <Button label="Clear" onClick={handleClear} />
-            <Button
-              label="Download"
-              onClick={handleDownload}
-              disabled={outputString === ""}
-            />
-            <Button
-              onClick={() => hiddenFileInput.current.click()}
-              label="Upload"
-            />
-            <input
-              type="file"
-              style={{ display: "none" }}
-              ref={hiddenFileInput}
-              onChange={handleUpload}
-            />
-            <Select
-              ref={selectRef}
-              classNamePrefix="react-select"
-              onChange={(e) => handleFormat(e.value)}
-              className={"react-select__container"}
-              menuPlacement="top"
-              options={INDENTATION_SPACE_OPTIONS}
-              defaultValue={DEFAULT_INDENTATION_SPACE}
-            />
+            <div className="flex flex-col min-w-80 w-80 justify-start space-y-2 px-1  rounded">
+              <label className="text-xs">Formatting</label>
+              <div className="flex flex-col space-y-2">
+                <Button
+                  label="Prettify"
+                  onClick={() => handleFormat(selectRef.current.state.value.value)}
+                />
+                <Button label="Clear" onClick={handleClear} />
+                <Button
+                  label="Download ↓"
+                  onClick={handleDownload}
+                  disabled={outputString === ""}
+                />
+                <Button
+                  onClick={() => hiddenFileInput.current.click()}
+                  label="Upload ↑"
+                />
+                <Button
+                  onClick={handleDemoJson}
+                  label="Demo JSON"
+                />
+              </div>
+              <label className="text-xs pt-3">Indentation</label>
+              <div className="flex flex-col">
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  ref={hiddenFileInput}
+                  onChange={handleUpload}
+                />
+                <Select
+                  ref={selectRef}
+                  classNamePrefix="react-select"
+                  onChange={(e) => handleFormat(e.value)}
+                  className={"react-select__container"}
+                  menuPlacement="bottom"
+                  options={INDENTATION_SPACE_OPTIONS}
+                  defaultValue={DEFAULT_INDENTATION_SPACE}
+                />
+              </div>
+ 
+            </div>
           </div>
         </div>
-        {/* <Footer /> */}
       </main>
       <script data-goatcounter="https://json-style.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
