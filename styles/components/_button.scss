@@ -1,7 +1,7 @@
 .button {
-  display: inline-flex;
+  // display: inline-flex;
   align-items: center;
-  font-size: $font-sm;
+  font-size: $text-sm;
   font-weight: $font-semibold;
   border-radius: $border-rounded-md;
   line-height: 1.2;
@@ -47,11 +47,11 @@
 
   &-medium {
     font-size: $text-base;
-    padding: 6px 10px;
+    padding: 10px 10px;
   }
 
   &-large {
     font-size: $text-base;
-    padding: 8px 12px;
+    padding: 12px 12px;
   }
 }

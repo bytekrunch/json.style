@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 const Button = ({
   className = "",
-  style = "secondary",
+  style = "primary",
   size = "medium",
   onClick = () => {},
   disabled = false,
