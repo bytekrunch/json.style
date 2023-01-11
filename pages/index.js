@@ -93,10 +93,10 @@ export default function Home() {
         <Header />
         <div className="space-y-3 grow flex flex-col">
           <div className="flex flex-1 relative grow space-x-3">
-            <div className="w-full bg-[#282c34]">
+            <div className="w-full">
               <CodeMirror
                 autoFocus
-                height="590px"
+                height="660px"
                 theme={createTheme(CODE_EDITOR_THEME)}
                 value={inputString}
                 extensions={editorExtensions}
@@ -104,7 +104,7 @@ export default function Home() {
                 className="h-full mt-1"
               />
             </div>
-            <div className="w-full relative bg-[#282c34]">
+            <div className="w-full relative">
               <Button
                 size="medium"
                 style="text"
@@ -115,7 +115,7 @@ export default function Home() {
                 disabled={outputString === ""}
               />
               <CodeMirror
-                height="590px"
+                height="660px"
                 theme={createTheme(CODE_EDITOR_THEME)}
                 editable={false}
                 value={outputString}
