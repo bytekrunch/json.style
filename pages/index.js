@@ -76,6 +76,12 @@ export default function Home() {
     setOutputString("");
   };
 
+  const handleDiff = () => {
+    console.log(inputString)
+    setInputString(JSON.stringify(JSON.parse(inputString), null, 2))
+    setOutputString(JSON.stringify(JSON.parse(outputString), null, 2))
+  }
+
   useEffect(() => {
     inputString === "" && setOutputString("");
   }, [inputString]);
@@ -117,8 +123,8 @@ export default function Home() {
               <CodeMirror
                 height="660px"
                 theme={createTheme(CODE_EDITOR_THEME)}
-                editable={false}
                 value={outputString}
+                onChange={e => setOutputString(e)}
                 extensions={editorExtensions}
                 className="overflow-auto absolute h-full mt-1 w-full"
               />
@@ -163,6 +169,17 @@ export default function Home() {
                   defaultValue={DEFAULT_INDENTATION_SPACE}
                 />
               </div>
+              <label className="text-xs pt-3 text-[#888888]">Operations</label>
+              <div className="flex flex-col space-y-2">
+                <Button
+                  label="Check Diff"
+                  onClick={handleDiff}
+                />
+                <Button
+                  label="Merge JSON"
+                  onClick={() => handleFormat(selectRef.current.state.value.value)}
+                />
+              </div> 
  
             </div>
           </div>
