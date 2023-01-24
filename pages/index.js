@@ -8,6 +8,7 @@ import Toastr from "../components/Toastr";
 import { ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import Select from "react-select";
+var stringify = require('json-stable-stringify');
 
 import { CODE_EDITOR_THEME } from "../constants/theme";
 import {
@@ -76,10 +77,38 @@ export default function Home() {
     setOutputString("");
   };
 
-  const handleDiff = () => {
-    console.log(inputString)
-    setInputString(JSON.stringify(JSON.parse(inputString), null, 2))
-    setOutputString(JSON.stringify(JSON.parse(outputString), null, 2))
+
+  const sortObject = o => Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {})
+
+  const jsonDiff = (a, b) => {
+
+  }
+  /*
+    ✅ - sort keys alphabetically
+    ✅ - format and print
+    🔳 - Iterate over every line and check for differences
+
+
+      for i in keys
+        if obj1.keys[i] == obj2.keys[i]
+           if obj2.value[2] == obj2.value[2]
+              return
+           else
+           if value
+  */
+ 
+  const handleDiff = () => {    
+    try {
+      setInputString(
+        stringify(JSON.parse(inputString), { space: '  ' })
+      );
+      setOutputString(
+        stringify(JSON.parse(outputString), { space: '  ' })
+      );
+
+    } catch (error) {
+      Toastr.error("Enter Valid JSON in both textarea");
+    }
   }
 
   useEffect(() => {
