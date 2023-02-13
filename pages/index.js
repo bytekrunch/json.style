@@ -9,8 +9,6 @@ import { ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import Select from "react-select";
 
-var stringify = require("json-stable-stringify");
-const { inspect } = require("util");
 const transform = require("lodash.transform");
 const isEqual = require("lodash.isequal");
 const isArray = require("lodash.isarray");
@@ -106,6 +104,12 @@ export default function Home() {
     }
 
     setDiffOrMergeString(JSON.stringify(changes(newObj, origObj), null, 2));
+  };
+
+  const handleMerge = () => {
+    let origObj = JSON.parse(inputString);
+    let newObj = JSON.parse(outputString);
+    setDiffOrMergeString(JSON.stringify({...origObj, ...newObj}, null, 2));
   };
 
   useEffect(() => {
@@ -213,7 +217,7 @@ export default function Home() {
                 <Button
                   label="Merge JSON"
                   onClick={() =>
-                    handleFormat(selectRef.current.state.value.value)
+                    handleMerge(selectRef.current.state.value.value)
                   }
                 />
               </div>
