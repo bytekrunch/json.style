@@ -9,6 +9,13 @@ import { ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import Select from "react-select";
 
+var stringify = require("json-stable-stringify");
+const { inspect } = require("util");
+const transform = require("lodash.transform");
+const isEqual = require("lodash.isequal");
+const isArray = require("lodash.isarray");
+const isObject = require("lodash.isobject");
+
 import { CODE_EDITOR_THEME } from "../constants/theme";
 import {
   DEFAULT_INDENTATION_SPACE,
@@ -23,6 +30,7 @@ export default function Home() {
     JSON.stringify(DEMO_JSON_STRING)
   );
   const [outputString, setOutputString] = useState("");
+  const [diffOrMergeString, setDiffOrMergeString] = useState("");
 
   const hiddenFileInput = useRef(null);
   const selectRef = useRef(null);
@@ -30,6 +38,7 @@ export default function Home() {
   let editorExtensions = [json(), EditorView.lineWrapping];
 
   const handleFormat = (indentationSpace = 2) => {
+    setDiffOrMergeString("");
     try {
       setOutputString(
         JSON.stringify(JSON.parse(inputString), null, indentationSpace)
@@ -42,6 +51,7 @@ export default function Home() {
   const handleClear = () => {
     setInputString("");
     setOutputString("");
+    setDiffOrMergeString("");
   };
 
   const handleDownload = () => {
@@ -67,6 +77,7 @@ export default function Home() {
   const handleDemoJson = () => {
     setInputString(JSON.stringify(DEMO_JSON_STRING));
     setOutputString("");
+    setDiffOrMergeString("");
   };
 
   const handleUpload = (e) => {
@@ -74,6 +85,27 @@ export default function Home() {
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => setInputString(e.target.result);
     setOutputString("");
+    setDiffOrMergeString("");
+  };
+
+  const handleDiff = () => {
+    let origObj = JSON.parse(inputString);
+    let newObj = JSON.parse(outputString);
+
+    function changes(newObj, origObj) {
+      let arrayIndexCounter = 0;
+      return transform(newObj, function (result, value, key) {
+        if (!isEqual(value, origObj[key])) {
+          let resultKey = isArray(origObj) ? arrayIndexCounter++ : key;
+          result[resultKey] =
+            isObject(value) && isObject(origObj[key])
+              ? changes(value, origObj[key])
+              : value;
+        }
+      });
+    }
+
+    setDiffOrMergeString(JSON.stringify(changes(newObj, origObj), null, 2));
   };
 
   useEffect(() => {
@@ -88,7 +120,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="h-screen flex flex-col justify-between bg-[#111111] pt-3 pb-4 px-4">
+      <main className="flex flex-col justify-between bg-[#111111] pt-3 pb-4 px-4 h-vh">
         <ToastContainer theme="dark" />
         <Header />
         <div className="space-y-3 grow flex flex-col">
@@ -117,18 +149,33 @@ export default function Home() {
               <CodeMirror
                 height="660px"
                 theme={createTheme(CODE_EDITOR_THEME)}
-                editable={false}
                 value={outputString}
+                onChange={(e) => setOutputString(e)}
                 extensions={editorExtensions}
                 className="overflow-auto absolute h-full mt-1 w-full"
               />
             </div>
+            {diffOrMergeString && (
+              <div className="w-full">
+                <CodeMirror
+                  autoFocus
+                  height="660px"
+                  theme={createTheme(CODE_EDITOR_THEME)}
+                  value={diffOrMergeString}
+                  extensions={editorExtensions}
+                  onChange={(e) => setDiffOrMergeString(e)}
+                  className="h-full mt-1"
+                />
+              </div>
+            )}
             <div className="flex flex-col min-w-80 w-80 justify-start space-y-2 px-1  rounded">
               <label className="text-xs text-[#888888]">Formatting</label>
               <div className="flex flex-col space-y-2">
                 <Button
                   label="Prettify"
-                  onClick={() => handleFormat(selectRef.current.state.value.value)}
+                  onClick={() =>
+                    handleFormat(selectRef.current.state.value.value)
+                  }
                 />
                 <Button label="Clear" onClick={handleClear} />
                 <Button
@@ -140,10 +187,7 @@ export default function Home() {
                   onClick={() => hiddenFileInput.current.click()}
                   label="Upload ↑"
                 />
-                <Button
-                  onClick={handleDemoJson}
-                  label="Demo JSON"
-                />
+                <Button onClick={handleDemoJson} label="Demo JSON" />
               </div>
               <label className="text-xs pt-3 text-[#888888]">Indentation</label>
               <div className="flex flex-col">
@@ -163,13 +207,25 @@ export default function Home() {
                   defaultValue={DEFAULT_INDENTATION_SPACE}
                 />
               </div>
- 
+              <label className="text-xs pt-3 text-[#888888]">Operations</label>
+              <div className="flex flex-col space-y-2">
+                <Button label="Check Diff" onClick={handleDiff} />
+                <Button
+                  label="Merge JSON"
+                  onClick={() =>
+                    handleFormat(selectRef.current.state.value.value)
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>
       </main>
-      <script data-goatcounter="https://json-style.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+      <script
+        data-goatcounter="https://json-style.goatcounter.com/count"
+        async
+        src="//gc.zgo.at/count.js"
+      ></script>
     </div>
   );
 }
