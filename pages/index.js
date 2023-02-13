@@ -8,7 +8,7 @@ import Toastr from "../components/Toastr";
 import { ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import Select from "react-select";
-import { HighlightStyle } from "@codemirror/language";
+
 var stringify = require("json-stable-stringify");
 const { inspect } = require("util");
 const transform = require("lodash.transform");
@@ -36,11 +36,6 @@ export default function Home() {
   const selectRef = useRef(null);
 
   let editorExtensions = [json(), EditorView.lineWrapping];
-
-  // const myHighlightStyle = HighlightStyle.define([
-  //   { tag: tags.keyword, color: "#fc6" },
-  //   { tag: tags.comment, color: "#f5d", fontStyle: "italic" },
-  // ]);
 
   const handleFormat = (indentationSpace = 2) => {
     setDiffOrMergeString("");
@@ -224,17 +219,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* <div className="w-7/12">
-            <CodeMirror
-              autoFocus
-              height="400px"
-              theme={createTheme(CODE_EDITOR_THEME)}
-              value={diffOrMergeString}
-              extensions={editorExtensions}
-              onChange={(e) => setDiffOrMergeString(e)}
-              className="h-full mt-1"
-            />
-          </div> */}
         </div>
       </main>
       <script
