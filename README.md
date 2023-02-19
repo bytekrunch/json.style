@@ -24,4 +24,4 @@ Contributions of all kinds are welcome! We recommend creating issues and discuss
 
 ## License
 
-json.style is open source software [licensed as MIT](/LICENSE). 
+json.style is open source software [licensed as MIT](/LICENSE.md). 
