@@ -21,6 +21,7 @@ import {
   INDENTATION_SPACE_OPTIONS,
 } from "../components/constants";
 import { Copy } from "../icons/Copy";
+import { Github } from "../icons/Github";
 import Header from "../components/Header";
 
 export default function Home() {
@@ -109,7 +110,7 @@ export default function Home() {
   const handleMerge = () => {
     let origObj = JSON.parse(inputString);
     let newObj = JSON.parse(outputString);
-    setDiffOrMergeString(JSON.stringify({...origObj, ...newObj}, null, 2));
+    setDiffOrMergeString(JSON.stringify({ ...origObj, ...newObj }, null, 2));
   };
 
   useEffect(() => {
@@ -172,54 +173,68 @@ export default function Home() {
                 />
               </div>
             )}
-            <div className="flex flex-col min-w-80 w-80 justify-start space-y-2 px-1  rounded">
-              <label className="text-xs text-[#888888]">Formatting</label>
-              <div className="flex flex-col space-y-2">
-                <Button
-                  label="Prettify"
-                  onClick={() =>
-                    handleFormat(selectRef.current.state.value.value)
-                  }
-                />
-                <Button label="Clear" onClick={handleClear} />
-                <Button
-                  label="Download ↓"
-                  onClick={handleDownload}
-                  disabled={outputString === ""}
-                />
-                <Button
-                  onClick={() => hiddenFileInput.current.click()}
-                  label="Upload ↑"
-                />
-                <Button onClick={handleDemoJson} label="Demo JSON" />
+            <div className="flex flex-col min-w-80 w-80 text-center justify-between px-1 rounded">
+              <div className="flex flex-col space-y-2 px-1 text-left">
+                <label className="text-xs text-[#888888]">Formatting</label>
+                <div className="flex flex-col space-y-2">
+                  <Button
+                    label="Prettify"
+                    onClick={() =>
+                      handleFormat(selectRef.current.state.value.value)
+                    }
+                  />
+                  <Button label="Clear" onClick={handleClear} />
+                  <Button
+                    label="Download ↓"
+                    onClick={handleDownload}
+                    disabled={outputString === ""}
+                  />
+                  <Button
+                    onClick={() => hiddenFileInput.current.click()}
+                    label="Upload ↑"
+                  />
+                  <Button onClick={handleDemoJson} label="Demo JSON" />
+                </div>
+                <label className="text-xs pt-3 text-[#888888]">
+                  Indentation
+                </label>
+                <div className="flex flex-col">
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    ref={hiddenFileInput}
+                    onChange={handleUpload}
+                  />
+                  <Select
+                    ref={selectRef}
+                    classNamePrefix="react-select"
+                    onChange={(e) => handleFormat(e.value)}
+                    className={"react-select__container"}
+                    menuPlacement="bottom"
+                    options={INDENTATION_SPACE_OPTIONS}
+                    defaultValue={DEFAULT_INDENTATION_SPACE}
+                  />
+                </div>
+                <label className="text-xs pt-3 text-[#888888]">
+                  Operations
+                </label>
+                <div className="flex flex-col space-y-2">
+                  <Button label="Check Diff" onClick={handleDiff} />
+                  <Button
+                    label="Merge JSON"
+                    onClick={() =>
+                      handleMerge(selectRef.current.state.value.value)
+                    }
+                  />
+                </div>
               </div>
-              <label className="text-xs pt-3 text-[#888888]">Indentation</label>
-              <div className="flex flex-col">
-                <input
-                  type="file"
-                  style={{ display: "none" }}
-                  ref={hiddenFileInput}
-                  onChange={handleUpload}
-                />
-                <Select
-                  ref={selectRef}
-                  classNamePrefix="react-select"
-                  onChange={(e) => handleFormat(e.value)}
-                  className={"react-select__container"}
-                  menuPlacement="bottom"
-                  options={INDENTATION_SPACE_OPTIONS}
-                  defaultValue={DEFAULT_INDENTATION_SPACE}
-                />
-              </div>
-              <label className="text-xs pt-3 text-[#888888]">Operations</label>
-              <div className="flex flex-col space-y-2">
-                <Button label="Check Diff" onClick={handleDiff} />
-                <Button
-                  label="Merge JSON"
-                  onClick={() =>
-                    handleMerge(selectRef.current.state.value.value)
-                  }
-                />
+              <div>
+                <a href="https://github.com/bytekrunch/json.style" target="_blank">
+                  <Github
+                    iconSize="22"
+                    className="mx-auto opacity-25 hover:opacity-75"
+                  />
+                </a>
               </div>
             </div>
           </div>

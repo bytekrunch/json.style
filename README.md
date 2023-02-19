@@ -8,7 +8,7 @@ The last JSON formatting tool you will ever need.
 git clone https://github.com/bytekrunch/json.style.git
 cd json.style
 yarn install
-yarn start
+yarn dev
 ```
 
 The app can be accessed at [http://localhost:3000](http://localhost:3000)
