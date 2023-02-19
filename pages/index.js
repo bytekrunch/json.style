@@ -132,12 +132,12 @@ export default function Home() {
             <div className="w-full">
               <CodeMirror
                 autoFocus
-                height="660px"
+                height="90vh"
                 theme={createTheme(CODE_EDITOR_THEME)}
                 value={inputString}
                 extensions={editorExtensions}
                 onChange={(e) => setInputString(e)}
-                className="h-full mt-1"
+                className="h-full mt-1 overflow-y-scroll"
               />
             </div>
             <div className="w-full relative">
@@ -151,12 +151,12 @@ export default function Home() {
                 disabled={outputString === ""}
               />
               <CodeMirror
-                height="660px"
+                height="90vh"
                 theme={createTheme(CODE_EDITOR_THEME)}
                 value={outputString}
                 onChange={(e) => setOutputString(e)}
                 extensions={editorExtensions}
-                className="overflow-auto absolute h-full mt-1 w-full"
+                className="overflow-y-scroll absolute h-full mt-1 w-full"
               />
             </div>
             {diffOrMergeString && (
