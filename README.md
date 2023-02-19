@@ -14,7 +14,7 @@ yarn start
 The app can be accessed at [http://localhost:3000](http://localhost:3000)
 
 ## Contributing
-Contributions of all kinds are welcome! We recommend creating issues and discussing your contribution first before you start hacking on it.
+Contributions of all kinds are welcome! We recommend creating issues and discussing your ideas first before you start hacking on it.
 
 1. Fork the repo ([https://github.com/bytekrunch/json.style/fork](https://github.com/bytekrunch/json.style/fork))
 2. Create your feature branch (git checkout -b my-new-feature)
