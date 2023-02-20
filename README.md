@@ -17,9 +17,9 @@ The app can be accessed at [http://localhost:3000](http://localhost:3000)
 Contributions of all kinds are welcome! We recommend creating issues and discussing your ideas first before you start hacking on it.
 
 1. Fork the repo ([https://github.com/bytekrunch/json.style/fork](https://github.com/bytekrunch/json.style/fork))
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
 ## License
