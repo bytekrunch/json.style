@@ -236,6 +236,7 @@ export default function Home() {
                 <a
                   href="https://github.com/bytekrunch/json.style"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <Github
                     iconSize="22"
