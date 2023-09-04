@@ -120,11 +120,13 @@ export default function Home() {
   return (
     <div>
       <Head>
+        <html lang="en" />
         <title>JSON formatter</title>
         <meta
           name="description"
-          content="The last JSON formatting tool you will ever need"
+          content="Format, validate, and beautify JSON data online with our free JSON formatter and validator tool."
         />
+
         <link rel="icon" href="/favicon.png" />
         <meta
           name="viewport"
