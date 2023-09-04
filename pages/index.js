@@ -120,13 +120,30 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>json.style</title>
-        <meta name="description" content="The last JSON formatting tool you will ever need" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content="https://user-images.githubusercontent.com/40194401/219963035-0e11bed8-fd1a-427a-93dd-bb73af25d03d.png"/>
-        <meta property="og:title" content="json.style"/>
-        <meta property="og:url" content="https://json.style"/>
-        g<meta name="twitter:card" content="https://user-images.githubusercontent.com/40194401/219963035-0e11bed8-fd1a-427a-93dd-bb73af25d03d.png"/>
+        <title>JSON formatter</title>
+        <meta
+          name="description"
+          content="The last JSON formatting tool you will ever need"
+        />
+        <link rel="icon" href="/favicon.png" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+        <meta
+          name="keywords"
+          content="JSON formatter, JSON validator, online JSON tool, JSON beautifier, JSON syntax checker"
+        ></meta>
+        <meta
+          property="og:image"
+          content="https://user-images.githubusercontent.com/40194401/219963035-0e11bed8-fd1a-427a-93dd-bb73af25d03d.png"
+        />
+        <meta property="og:title" content="json formatter" />
+        <meta property="og:url" content="https://json.style" />
+        <meta
+          name="twitter:card"
+          content="https://user-images.githubusercontent.com/40194401/219963035-0e11bed8-fd1a-427a-93dd-bb73af25d03d.png"
+        />
       </Head>
 
       <main className="flex flex-col justify-between bg-[#111111] pt-3 pb-4 px-4 h-vh">
@@ -168,7 +185,7 @@ export default function Home() {
               <div className="w-full">
                 <CodeMirror
                   autoFocus
-                  height="660px"
+                  height="90vh"
                   theme={createTheme(CODE_EDITOR_THEME)}
                   value={diffOrMergeString}
                   extensions={editorExtensions}
