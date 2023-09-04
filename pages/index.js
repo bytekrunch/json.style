@@ -124,7 +124,7 @@ export default function Home() {
         <title>JSON formatter</title>
         <meta
           name="description"
-          content="Format, validate, and beautify JSON data online with our free JSON formatter and validator tool."
+          content="Format, validate and beautify JSON data online with our free JSON formatter and validator tool."
         />
 
         <link rel="icon" href="/favicon.png" />
