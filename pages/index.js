@@ -120,7 +120,6 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <html lang="en" />
         <title>JSON formatter</title>
         <meta
           name="description"
